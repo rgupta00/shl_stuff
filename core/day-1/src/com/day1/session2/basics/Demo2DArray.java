@@ -3,12 +3,20 @@ package com.day1.session2.basics;
 public class Demo2DArray {
 
 	public static void main(String[] args) {
-		int x[][] = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 1, 1 } };
+		int[][] x = get2DArray();
 
 		print2DArray(x);
+		
 		boolean isIdentityMatrix = isIdentityMatrix(x);
 
 		System.out.println(isIdentityMatrix);
+		
+		
+	}
+
+	private static int[][] get2DArray() {
+		int x[][] = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 1, 1 } };
+		return x;
 	}
 
 	private static boolean isIdentityMatrix(int[][] x) {
