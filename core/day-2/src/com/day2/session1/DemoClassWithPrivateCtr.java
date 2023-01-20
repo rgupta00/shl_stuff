@@ -16,7 +16,7 @@ public class DemoClassWithPrivateCtr {
 	
 	public static void main(String[] args) {
 		MyClass class1=MyClass.getMyClass();
-		System.out.println(class1.hashCode());
+		System.out.println(class1.hashCode());//hashcode *Collection
 		MyClass class2=MyClass.getMyClass();
 		System.out.println(class2.hashCode());
 		
