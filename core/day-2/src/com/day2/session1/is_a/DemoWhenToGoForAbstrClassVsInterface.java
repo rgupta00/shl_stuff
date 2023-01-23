@@ -83,9 +83,9 @@ class PartTimeEmployee extends Employee{
 }
 
 class FullTimeEmployee extends Employee{
-	private String ppf;
-	private double shareValue;
-	private double salary;// hra...
+		private String ppf;
+		private double shareValue;
+		private double salary;// hra...
 	public FullTimeEmployee(int employeeId, String employeeName,
 			String ppf, double shareValue, double salary) {
 		super(employeeId, employeeName);
