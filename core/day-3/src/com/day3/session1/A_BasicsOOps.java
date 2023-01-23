@@ -40,6 +40,8 @@ package com.day3.session1;
 //
 //}
 
+
+//
 class Val{
 	int data;
 
@@ -55,21 +57,33 @@ class Val{
 		this.data = data;
 	}
 	
-	
 }
 public class A_BasicsOOps {
 	
 	public static void main(String[] args) {
 			Val i=new Val(9);
+			
+
+//			System.out.println("value of i" + i.getData()+" value of j:"+ j.getData());
+//			swap(i, j);
+//			System.out.println("value of i" + i.getData()+" value of j:"+ j.getData());
+			
 			System.out.println("value of i: "+ i.getData());
 			changeMe(i);
 			System.out.println("value of i: "+ i.getData());
 	}
 
-	 static void changeMe(final Val i) {
+	 static void changeMe( Val i) {
 		 //i is final ie i cant change but the state of object can be change
-		i.setData(i.getData()+100);
+		 //i.setData(i.getData()+100);
+		 i=null;
 	}
+	 
+//	static void swap(Val i, Val j) {
+//	 	Val temp=i;
+//	 	i=j;
+//	 	j=temp;
+//	}
 }
 
 
@@ -78,15 +92,8 @@ public class A_BasicsOOps {
 
 
 
-//System.out.println("value of i" + i.getData()+" value of j:"+ j.getData());
-//swap(i, j);
-//System.out.println("value of i" + i.getData()+" value of j:"+ j.getData());
 
-//static void swap(Val i, Val j) {
-// 	Val temp=i;
-// 	i=j;
-// 	j=temp;
-//}
+
 
 
 

@@ -1,5 +1,6 @@
 package a.c;
 import a.b.*;
+
 //private	default 		protected	public
 public class BDemo2 extends A{
 	

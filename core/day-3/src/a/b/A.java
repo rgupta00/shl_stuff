@@ -18,5 +18,4 @@ public class A {
 	public void foo4() {
 		System.out.println("foo4 is public method of class A");
 	}
-	
 }
