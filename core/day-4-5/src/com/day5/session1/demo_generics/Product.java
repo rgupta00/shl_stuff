@@ -1,6 +1,6 @@
 package com.day5.session1.demo_generics;
 
-public class Product {
+public class Product implements Comparable<Product>{
 	private int id;
 	private String name;
 	
@@ -26,6 +26,11 @@ public class Product {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Emp [id=").append(id).append(", name=").append(name).append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(Product o) {
+		return Integer.compare(this.getId(), o.getId());
 	}
 	
 	

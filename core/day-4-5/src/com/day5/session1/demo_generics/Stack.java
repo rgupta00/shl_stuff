@@ -15,7 +15,7 @@ class StackUnderflowEx extends RuntimeException{
 	}
 }
 
-public class Stack<T>{
+public class Stack<T extends Comparable<T>>{
 	private T arr[];
 	private int top;
 	private int size=5;

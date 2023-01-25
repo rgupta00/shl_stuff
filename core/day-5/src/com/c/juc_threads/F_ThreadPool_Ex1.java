@@ -14,14 +14,14 @@ class CpuIntensiveJob implements Runnable{
 public class F_ThreadPool_Ex1 {
 
 	public static void main(String[] args) {
-		int noOfCors=Runtime.getRuntime().availableProcessors();
-		ExecutorService es= Executors.newFixedThreadPool(noOfCors);
-		
-		for(int i=0;i<100;i++) {
-			es.execute(new CpuIntensiveJob());
-		}
-		
-		es.shutdown();
+//		int noOfCors=Runtime.getRuntime().availableProcessors();
+//		ExecutorService es= Executors.newFixedThreadPool(noOfCors);
+//		
+//		for(int i=0;i<100;i++) {
+//			es.execute(new CpuIntensiveJob());
+//		}
+//		
+//		es.shutdown();
 		
 		
 		

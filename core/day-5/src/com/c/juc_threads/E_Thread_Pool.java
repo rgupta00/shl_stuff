@@ -32,15 +32,17 @@ class Factorial implements Callable<Long> {
 
 public class E_Thread_Pool {
 
-	public static void main(String[] args) throws InterruptedException, ExecutionException {
-		Callable<Long> task = new Factorial(10);
-		ExecutorService es = Executors.newSingleThreadExecutor();
-		System.out.println("---------");
-		Future<Long> submit = es.submit(task);
-		System.out.println("^^^^^^^^^^^^^^");
-
-		System.out.println(submit.get());
-		System.out.println("!!!!!!!!!!!!!!");
-		es.shutdown();
+	public static void main(String[] args)  {
+		
+		
+//		Callable<Long> task = new Factorial(10);
+//		ExecutorService es = Executors.newSingleThreadExecutor();
+//		System.out.println("---------");
+//		Future<Long> submit = es.submit(task);
+//		System.out.println("^^^^^^^^^^^^^^");
+//
+//		System.out.println(submit.get());
+//		System.out.println("!!!!!!!!!!!!!!");
+//		es.shutdown();
 	}
 }

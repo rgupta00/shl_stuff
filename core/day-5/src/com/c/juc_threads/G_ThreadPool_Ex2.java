@@ -14,14 +14,14 @@ class IOIntensiveJob implements Runnable{
 public class G_ThreadPool_Ex2 {
 
 	public static void main(String[] args) {
-		
-		ExecutorService es= Executors.newCachedThreadPool();
-		
-		for(int i=0;i<100;i++) {
-			es.execute(new CpuIntensiveJob());
-		}
-		
-		es.shutdown();
+//		
+//		ExecutorService es= Executors.newCachedThreadPool();
+//		
+//		for(int i=0;i<100;i++) {
+//			es.execute(new CpuIntensiveJob());
+//		}
+//		
+//		es.shutdown();
 		
 		
 		

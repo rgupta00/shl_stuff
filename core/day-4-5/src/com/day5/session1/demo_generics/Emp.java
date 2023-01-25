@@ -1,6 +1,6 @@
 package com.day5.session1.demo_generics;
 
-public class Emp {
+public class Emp implements Comparable<Emp>{
 	private int id;
 	private String name;
 	
@@ -26,6 +26,11 @@ public class Emp {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Emp [id=").append(id).append(", name=").append(name).append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(Emp o) {
+		return Integer.compare(this.getId(), o.getId());
 	}
 	
 	
