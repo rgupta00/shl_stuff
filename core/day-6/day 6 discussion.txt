@@ -1,0 +1,79 @@
+day 6:
+----------
+quick recap java 8 streams, optional, date time
+solid , GOF patterns, jdbc basics
+
+
+SQL vs NOSQL
+
+jdbc basics
+-------
+API to connect to rdbms
+mysql?
+
+jdbc api is implemented via the database vendor
+
+mysql , oracle, sql server ....
+
+	jdbc api----->	code :
+			mysql: mysql jar file
+			oracle: oracle jar file
+
+how to write hello world of jdbc?
+
+	1. create a new object
+	2. need to download the jar file from maven repo(*)
+	3. need to follow some step for hello world
+
+	table
+	create database shl;
+	use shl;
+	create table customer(id int not null primary key auto_increment, name varchar(30) not null, address varchar(100) not null,phone varchar(100) not null);
+
+	insert into customer(name, address, phone) values('amit','laxmi nagar delhi','5666565660');
+	insert into customer(name, address, phone) values('sumt','preet vihar delhi','5660565660');
+	insert into customer(name, address, phone) values('reena','kalu sarai delhi','5006565660');
+
+	CRUD opeation
+
+	C
+	R
+	U
+	D
+
+
+	3 tier arch
+
+	  web		service 		dao layer		db
+	<---------->|<------------->|<---------->
+
+
+
+
+solid , GOF patterns
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
