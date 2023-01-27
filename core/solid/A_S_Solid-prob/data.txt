@@ -1,0 +1,8 @@
+create database dpdemo;
+mysql -u root -p
+use  dpdemo;
+
+create table Book (id integer not null auto_increment, author varchar(255), isbn varchar(255), price double precision not null, title varchar(255), primary key (id));
+
+insert into Book (author, isbn, price, title) values ('raj', 'abc121', 4455.8, 'java head first');
+

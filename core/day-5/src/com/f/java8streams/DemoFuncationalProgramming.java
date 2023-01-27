@@ -17,21 +17,23 @@ public class DemoFuncationalProgramming {
 		emps.add(new Emp(7, "gun",968000, "Sales"));
 		emps.add(new Emp(9, "keshav", 560000, "Mkt"));
 		
+		//find the name of all emp whose are working in IT dept sorted by there sal
+
+		
+		//java 8 stream processing?
+		//flow of data proccessing that can be applied over collection
 		
 		
-		//find the name of all emp whose are working in it temp dept sorted by there sal
+		List<String> names = emps.stream()
+		.sorted(Comparator.comparing(Emp::getSalary).reversed())
+		.parallel()
+		.filter(e-> e.getDept().equals("IT"))
+		.map(e-> e.getName())
+		.collect(Collectors.toList());
 		
-		//java 8 :)
-//		List<String> names = emps.stream()
-//				.filter(e->e.getDept()
-//				.equals("IT"))
-//				.sorted(Comparator.comparing(Emp::getSalary).reversed())
-//		.map(e-> e.getName()).collect(Collectors.toList());
-//		
-//		names.forEach(name-> System.out.println(name));
-//		
-//		
+		names.forEach(name-> System.out.println(name));
 		
+
 		// java 1.7 :(
 //		Collections.sort(emps, new Comparator<Emp>() {
 //

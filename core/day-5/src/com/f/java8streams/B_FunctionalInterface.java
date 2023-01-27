@@ -2,10 +2,11 @@ package com.f.java8streams;
 
 import java.io.File;import java.io.FileFilter;
 import java.util.Comparator;
+import java.util.Optional;
 
 @FunctionalInterface
 interface Foof{
-	void foo();
+	void foo();//SAM
 }
 public class B_FunctionalInterface {
 	
@@ -15,6 +16,7 @@ public class B_FunctionalInterface {
 		Foof f=()-> System.out.println("hello to all");
 			
 	
+		
 		Runnable  runnable=()-> System.out.println("job of the threads...");
 		
 		
