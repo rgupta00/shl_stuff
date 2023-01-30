@@ -17,9 +17,12 @@ class Book {
 	private String title;
 	private String author;
 	private double price;
+	
 	public boolean valiation() {
 		return true;
 	}
+	
+	
 	public Connection  getConnection(){
 		 Connection connection=null;
 		Properties prop=new Properties();//aka hashtable,,used to load prop file

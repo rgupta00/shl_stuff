@@ -1,6 +1,8 @@
 package com.demo;
 
-//Rectangle "reuse" Square : Inheritance XXX
+//Rectangle "reuse" Square : Inheritance 
+//sqare rectangle project
+
 class Rectangle {
 	private int l, b;
 
@@ -30,33 +32,65 @@ class Rectangle {
 	}
 
 }
+//
+//class Square extends Rectangle {
+//	public Square(int l) {
+//		super(l, l);
+//	}
+//	
+//}
 
-class Square extends Rectangle {
+
+
+class Square  {
+	private Rectangle rectangle=null;
+	
 	public Square(int l) {
-		super(l, l);
+		this.rectangle=new Rectangle(l, l);
 	}
+
 	public int calculateArea() {
-		return super.calculateArea();
+		return rectangle.calculateArea();
 	}
-	public void setDimension(int changeDimension) {
-		super.setB(changeDimension);
-		setB(changeDimension);
+	public void changeDimension(int changeDimension) {
+		this.rectangle.setB(changeDimension);
+		this.rectangle.setL(changeDimension);
 	}
 }
+
 
 public class DemoLiskov {
 
 	public static void main(String[] args) {
-		/*
-		 * 
-		 * favour composition over inheritance square rectangle liskov java
-		 * 
-		 */
-		Square square=new Square(3);
-		int area=square.calculateArea();
-		System.out.println(area);
-		square.setB(10);
 		
-		System.out.println(area);
+		Square square=new Square(4);
+		
+		System.out.println(square.calculateArea());
+		
+		
+		square.changeDimension(5);
+		
+		
+		System.out.println(square.calculateArea());
+		
+		
+		
+		
+		
+		
+		
+		
+//		/*
+//		 * 
+//		 * favour composition over inheritance square rectangle liskov java
+//		 * 
+//		 */
+//		Square square=new Square(3);
+//		int area=square.calculateArea();
+//		System.out.println(area);
+//		square.setB(10);
+//		area=square.calculateArea();
+//		System.out.println(area);
+	
 	}
 }

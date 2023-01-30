@@ -9,7 +9,20 @@ public class Main {
 				new Book("129", "power of subconsious mind", "foo", 600)
 				);
 		
-	
+//	
+//		books.forEach(b-> System.out.println(b));
+		
+		
+		Comparator<Book> compararedAsPerPrice= ( o1,  o2)-> 
+				 Double.compare(o2.getPrice(), o1.getPrice());
+			
+		
+		
+		
+		
+		
+		List<Book> books2=BookService.getAllBooksSortedAsPerCondition(books,compararedAsPerPrice);
 		books.forEach(b-> System.out.println(b));
+		
 	}
 }
