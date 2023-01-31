@@ -9,12 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-@Entity
-@Table(name = "account_table")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "acc_type", discriminatorType = DiscriminatorType.STRING)
+
 public abstract class Account {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int accountId;
 	private String accountHolderName;
 	private double balance;

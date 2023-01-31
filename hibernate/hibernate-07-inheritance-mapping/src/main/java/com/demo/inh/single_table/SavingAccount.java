@@ -4,8 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-@Entity
-@DiscriminatorValue("SAVE")
+
 public class SavingAccount extends Account {
 
 	//@Column(nullable = false)

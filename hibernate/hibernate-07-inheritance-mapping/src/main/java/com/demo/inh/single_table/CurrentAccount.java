@@ -4,8 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-@Entity
-@DiscriminatorValue("CURR")
+
 public class CurrentAccount extends Account {
 
 	//@Column(nullable = false)

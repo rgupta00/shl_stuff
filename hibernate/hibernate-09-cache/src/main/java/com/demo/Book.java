@@ -16,31 +16,28 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 //@Cacheable
-@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
-@Entity
-@Table(name = "book_table_caching_2")
+//@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
+//@Entity
+//@Table(name = "book_table_caching_2")
 public class Book {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int id;
 	
-	@Column(name = "book_isbn", unique = true, nullable = false, length = 40)
+	
 	private String isbn;
 	
-	@Column(name = "book_title", nullable = false, length = 100)
+	
 	private String title;
 	
-	@Column(name = "book_author", nullable = false, length = 100)
+	
 	private String author;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "book_pubDate", nullable = false)
+	
 	private Date pubDate;
 	
-	@Column(name = "book_price", nullable = false)
+	
 	private double price;
 	
-	@Column(name = "book_rank")
 	private int rank;
 	
 	

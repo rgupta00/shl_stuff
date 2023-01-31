@@ -5,13 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "cust_table")
-@ToString
-@EqualsAndHashCode
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
