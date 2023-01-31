@@ -35,9 +35,10 @@ public class ShowAll {
 		List<CustomerData> customersData=session
 				.createQuery("select new com.demo.CustomerData( c.name, c.phone) from Customer c",CustomerData.class).getResultList();
 		
-		
+	
 		customersData.forEach(c-> System.out.println(c));
 		
+		System.out.println(session);
 		sessionFactory.close();
 		session.close();
 		
