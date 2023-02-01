@@ -5,10 +5,10 @@
 <hibernate-configuration>
 	<session-factory>
 		<!-- database connection setting -->
-		<property name="connection.url">jdbc:mysql://localhost:3306/hibdemo</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/hibdemo?useSSL=false</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">root</property>
-		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
 
 		<!-- disable the second level cache -->

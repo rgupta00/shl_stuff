@@ -60,23 +60,23 @@ public class DemoTester {
 		Session session = factory.openSession();
 
 		session.getTransaction().begin();
-
-		List<Employee> employees=session
-				.createQuery("select e from Employee e",Employee.class).getResultList();
-
-		for (Employee e: employees){
-			System.out.println(e.getEmpName());
-			System.out.println("No of project : "+ e.getProjects().size());
-		}
-//		session.save(project1);
-//		session.save(project2);
-//		session.save(project3);
-//		session.save(project4);
 //
-//		session.save(employee1);
-//		session.save(employee2);
-//		session.save(employee3);
-//		session.save(employee4);
+//		List<Employee> employees=session
+//				.createQuery("select e from Employee e",Employee.class).getResultList();
+//
+//		for (Employee e: employees){
+//			System.out.println(e.getEmpName());
+//			System.out.println("No of project : "+ e.getProjects().size());
+//		}
+		session.save(project1);
+		session.save(project2);
+		session.save(project3);
+		session.save(project4);
+
+		session.save(employee1);
+		session.save(employee2);
+		session.save(employee3);
+		session.save(employee4);
 //
 		session.getTransaction().commit();
 

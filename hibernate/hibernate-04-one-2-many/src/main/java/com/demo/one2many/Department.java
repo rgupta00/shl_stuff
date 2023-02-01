@@ -1,17 +1,27 @@
 package com.demo.one2many;
 
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.*;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "d_table")
 public class Department {
 	
+
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer deptId;
 
 	private String detpName;
 
-
+	@LazyCollection(LazyCollectionOption.EXTRA)
+	@BatchSize(size = 2)
+	@OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch =FetchType.LAZY )
 	private List<Employee> employees = new ArrayList<Employee>();
 
 	public Department(String detpName) {

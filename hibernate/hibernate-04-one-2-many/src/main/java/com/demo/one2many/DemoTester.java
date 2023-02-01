@@ -16,6 +16,9 @@ public class DemoTester {
 		Department department2 = new Department("sales");
 		Department department3 = new Department("mkt");
 		Department department4 = new Department("r&d");
+		
+		Department department5 = new Department("training");
+		
 
 		Employee employee1 = new Employee("raja");
 		Employee employee2 = new Employee("amit");
@@ -25,6 +28,9 @@ public class DemoTester {
 		Employee employee5 = new Employee("keshav");
 		Employee employee6 = new Employee("gunika");
 		Employee employee7 = new Employee("rajiv");
+		
+		Employee employee8 = new Employee("foo");
+		
 
 		department1.getEmployees().add(employee1);
 		department1.getEmployees().add(employee2);
@@ -36,6 +42,8 @@ public class DemoTester {
 		department3.getEmployees().add(employee6);
 		department3.getEmployees().add(employee7);
 
+		department5.getEmployees().add(employee8);
+		
 		employee1.setDepartment(department1);
 		employee2.setDepartment(department1);
 
@@ -45,44 +53,48 @@ public class DemoTester {
 		employee5.setDepartment(department3);
 		employee6.setDepartment(department3);
 		employee7.setDepartment(department3);
+		employee8.setDepartment(department5);
 
 		
 		SessionFactory factory = HibernateSessionFactory.getSessionFactory();
 
 		Session session = factory.openSession();// getCurrentSession (web application spring)
 
-		//session.getTransaction().begin();
-
+		
+		
+//
+//		session.getTransaction().begin();
+//
 //		session.persist(department1);
 //		session.persist(department2);
 //		session.persist(department3);
 //		session.persist(department4);
+//		session.persist(department5);
 ////
-//		session.persist(employee1);
-//		session.persist(employee2);
-//		session.persist(employee3);
-//		session.persist(employee4);
-//		session.persist(employee5);
-//		session.persist(employee6);
-//		session.persist(employee7);
-
-		//session.getTransaction().commit();
+////		session.persist(employee1);
+////		session.persist(employee2);
+////		session.persist(employee3);
+////		session.persist(employee4);
+////		session.persist(employee5);
+////		session.persist(employee6);
+////		session.persist(employee7);
+//
+//		session.getTransaction().commit();
+		
 
 		List<Department> departments=session
-				.createQuery("select d from Department d")
+				.createQuery("select d from Department d",Department.class)
 				.getResultList();
-
-//		List<Department> departments=session
-//				.createQuery("from Department d join fetch d.employees Employee")
-//				.getResultList();
-
+//
+////		List<Department> departments=session
+////				.createQuery("from Department d join fetch d.employees Employee",Department.class)
+////				.getResultList();
+//
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$");
 		for(Department dept:departments ) {
 			System.out.println("---------------");
 			System.out.println(dept.getDetpName());
-			for(Employee e: dept.getEmployees()) {
-				System.out.println(e.getEmpName());
-			}
+			System.out.println(dept.getEmployees().size());
 		}
 
 
@@ -93,6 +105,13 @@ public class DemoTester {
 //				.getResultList();
 //
 
+		
+		
+		
+
+		
+		
+		
 		
 		
 		session.close();

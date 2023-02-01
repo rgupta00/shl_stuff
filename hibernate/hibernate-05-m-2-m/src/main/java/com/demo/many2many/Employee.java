@@ -6,11 +6,16 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.util.*;
 
+@Entity
+@Table(name = "e_table")
 public class Employee {
 	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int empId;
 	private String empName;
 
+	
+	@ManyToMany(mappedBy = "employees")
 	private List<Project> projects = new ArrayList<Project>();
 
 	public Employee() {
