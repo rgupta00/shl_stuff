@@ -24,7 +24,7 @@ public class Insert {
 		
 		Transaction tx = session.getTransaction();
 		
-		Customer customer=new Customer("sunit", "noida", "5600095494","seema@gmail.com");
+		Customer customer=new Customer("manish", "noida", "5600095494","seema@gmail.com");
 		
 		
 		try {

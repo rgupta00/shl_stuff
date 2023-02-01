@@ -5,16 +5,13 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.*;
-@Entity
-@Table(name = "project_table_m2m")
+
 public class Project {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int projectId;
 	private String projectName;
 
-	@ManyToMany(mappedBy = "projects")
-	@LazyCollection(LazyCollectionOption.EXTRA)
+	
 	private List<Employee> employees = new ArrayList<Employee>();
 
 //	public void addEmployeeToProject(Employee employee){

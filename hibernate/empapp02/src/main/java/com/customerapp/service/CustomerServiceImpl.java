@@ -4,14 +4,15 @@ import java.util.List;
 
 import com.customerapp.dao.Customer;
 import com.customerapp.dao.CustomerDao;
-import com.customerapp.dao.CustomerDaoImpl;
+import com.customerapp.dao.CustomerDaoHibImpl;
+import com.customerapp.dao.CustomerDaoJdbcImpl;
 
 public class CustomerServiceImpl implements CustomerService {
 	
 	private CustomerDao customerDao;
 	
 	public CustomerServiceImpl() {
-		customerDao=new CustomerDaoImpl();
+		customerDao=new CustomerDaoHibImpl();
 	}
 
 	@Override

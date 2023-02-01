@@ -2,13 +2,24 @@ package com.demo.one2one.uni;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
+@Entity
+@Table(name = "e_table")
 public class Employee {
 	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int empId;
 	private String empName;
 	
-	public Employee() {}
 	
 	public Employee(String empName) {
 		this.empName = empName;

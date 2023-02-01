@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Embeddable
+//@Embeddable
 public class Address {
     private String addressLine;
     private String city;

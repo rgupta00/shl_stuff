@@ -19,8 +19,12 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- jdbc connection pool build in  -->
 		<property name="connection.pool_size">50</property>
+		<mapping class="com.demo.Customer" />
+		
 		<!-- <property name="current_session_context_class">thread</property> -->
 	
-		 <mapping class="com.demo.Customer" />
+		<!--  <mapping class="com.demo.Customer" />
+		 <mapping class="com.demo.Account" /> -->
+		  
 	</session-factory>
 </hibernate-configuration>

@@ -25,7 +25,7 @@ public class Customer {
 	private String mobile;
 
 
-	@ElementCollection
+	//@ElementCollection
 	private List<Address> addresses=new ArrayList<>();
 
 

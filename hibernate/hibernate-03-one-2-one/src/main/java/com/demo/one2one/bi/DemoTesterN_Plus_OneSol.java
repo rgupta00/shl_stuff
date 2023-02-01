@@ -12,30 +12,30 @@ public class DemoTesterN_Plus_OneSol {
 
 	public static void main(String[] args) {
 
-//		Employee employee1=new Employee("raj");
-//		Employee employee2=new Employee("ekta");
-//		Employee employee3=new Employee("gun");
-//		Employee employee4=new Employee("keshav");
-//		Employee employee5=new Employee("vikas");
-//
-//		Parking parking1=new Parking("A12");
-//		Parking parking2=new Parking("M2");
-//		Parking parking3=new Parking("B2");
-//		Parking parking4=new Parking("T11");
-//		Parking parking5=new Parking("U12");
-//
-//
-//		parking1.setEmployee(employee1);
-//		parking2.setEmployee(employee2);
-//		parking3.setEmployee(employee3);
-//		parking4.setEmployee(employee4);
-//		parking5.setEmployee(employee5);
-//
-//		employee1.setParking(parking1);
-//		employee2.setParking(parking2);
-//		employee3.setParking(parking3);
-//		employee4.setParking(parking4);
-//		employee5.setParking(parking5);
+		Employee employee1=new Employee("raj");
+		Employee employee2=new Employee("ekta");
+		Employee employee3=new Employee("gun");
+		Employee employee4=new Employee("keshav");
+		Employee employee5=new Employee("vikas");
+
+		Parking parking1=new Parking("A12");
+		Parking parking2=new Parking("M2");
+		Parking parking3=new Parking("B2");
+		Parking parking4=new Parking("T11");
+		Parking parking5=new Parking("U12");
+
+
+		parking1.setEmployee(employee1);
+		parking2.setEmployee(employee2);
+		parking3.setEmployee(employee3);
+		parking4.setEmployee(employee4);
+		parking5.setEmployee(employee5);
+
+		employee1.setParking(parking1);
+		employee2.setParking(parking2);
+		employee3.setParking(parking3);
+		employee4.setParking(parking4);
+		employee5.setParking(parking5);
 
 
 		SessionFactory factory = HibernateSessionFactory.getSessionFactory();
@@ -46,11 +46,11 @@ public class DemoTesterN_Plus_OneSol {
 
 		try{
 			tx.begin();
-//			session.save(parking1);
-//			session.save(parking2);
-//			session.save(parking3);
-//			session.save(parking4);
-//			session.save(parking5);
+			session.save(parking1);
+			session.save(parking2);
+			session.save(parking3);
+			session.save(parking4);
+			session.save(parking5);
 			//due to cascading in dont need to that   session.save(employee1);
 
 			tx.commit();

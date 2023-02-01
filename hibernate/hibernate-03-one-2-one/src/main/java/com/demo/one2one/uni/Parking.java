@@ -2,20 +2,33 @@ package com.demo.one2one.uni;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
+@Entity
+@Table(name = "p_table")
 public class Parking {
 	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int partingId;
 	private String parkingLocation;
 
-	
+	@JoinColumn(name = "empId_fk",unique = true)
+	@OneToOne(cascade =CascadeType.ALL,fetch = FetchType.EAGER)
 	private Employee employee;
 
 	public Parking(String parkingLocation) {
 		this.parkingLocation = parkingLocation;
 	}
 
-	public Parking() {
-	}
+	
 
 	public int getPartingId() {
 		return partingId;
