@@ -1,4 +1,6 @@
-package com.bankapp;
+package com.bankapp.service.impl;
+
+import com.bankapp.service.MessagingService;
 
 public class EmailService implements MessagingService {
 
