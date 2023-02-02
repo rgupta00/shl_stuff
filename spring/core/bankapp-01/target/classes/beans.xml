@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- bean wiring -->
+
+    <bean id="bankservice" class="com.bankapp.BankService" autowire="byType">
+		
+	</bean>
+	 
+	<bean id="ms1" class="com.bankapp.EmailService" autowire-candidate="false"/>
+	<bean id="ms2" class="com.bankapp.SmsService"/>
+	
+</beans>
