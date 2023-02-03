@@ -1,0 +1,72 @@
+INFO  | 2023-02-02 16:48:37 | [main] controller.HelloLogging (HelloLogging.java:11) - code is working till line 6....
+ERROR | 2023-02-02 16:48:37 | [main] controller.HelloLogging (HelloLogging.java:17) - some no formate error
+INFO  | 2023-02-02 16:48:37 | [main] controller.HelloLogging (HelloLogging.java:20) - code is working till line 19....
+INFO  | 2023-02-02 16:54:39 | [main] impl.AccountServiceImpl (AccountServiceImpl.java:44) - time taken to execute transfer method is 0 ms
+INFO  | 2023-02-02 16:55:19 | [main] impl.AccountServiceImpl (AccountServiceImpl.java:44) - time taken to execute transfer method is 2014 ms
+WARN  | 2023-02-03 12:09:27 | [main] support.AbstractApplicationContext (AbstractApplicationContext.java:559) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'accountDaoMapImpl' defined in file [C:\shl_stuff\spring\core\bankapp-04-xml\target\classes\com\bankapp\repository\AccountDaoMapImpl.class]: Initialization of bean failed; nested exception is java.lang.IllegalArgumentException: Pointcut is not well-formed: expecting ')' at character position 16
+exection(public void transfer(..))
+                ^^^^
+
+WARN  | 2023-02-03 12:10:39 | [main] support.AbstractApplicationContext (AbstractApplicationContext.java:559) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'accountDaoMapImpl' defined in file [C:\shl_stuff\spring\core\bankapp-04-xml\target\classes\com\bankapp\repository\AccountDaoMapImpl.class]: Initialization of bean failed; nested exception is java.lang.IllegalArgumentException: Pointcut is not well-formed: expecting ')' at character position 16
+exection(public void transfer(int fromAccId, int toAccId, double amount))
+                ^^^^
+
+INFO  | 2023-02-03 12:11:40 | [main] aspects.LoggingAspect (LoggingAspect.java:27) - time taken to execute transfer method is 2002 ms
+INFO  | 2023-02-03 12:12:09 | [main] aspects.LoggingAspect (LoggingAspect.java:27) - time taken to execute transfer method is 2025 ms
+INFO  | 2023-02-03 12:19:04 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute 0 ms
+INFO  | 2023-02-03 12:19:04 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute 5 ms
+INFO  | 2023-02-03 12:19:05 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute 1003 ms
+INFO  | 2023-02-03 12:19:07 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute 1010 ms
+INFO  | 2023-02-03 12:19:07 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute 0 ms
+INFO  | 2023-02-03 12:19:07 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute 0 ms
+INFO  | 2023-02-03 12:19:07 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute 2014 ms
+INFO  | 2023-02-03 12:19:07 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute 0 ms
+INFO  | 2023-02-03 12:19:07 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute 0 ms
+INFO  | 2023-02-03 12:20:39 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:20:39 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts6 ms
+INFO  | 2023-02-03 12:20:40 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getById1011 ms
+INFO  | 2023-02-03 12:20:41 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getById1010 ms
+INFO  | 2023-02-03 12:20:41 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute updateAccount0 ms
+INFO  | 2023-02-03 12:20:41 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute updateAccount0 ms
+INFO  | 2023-02-03 12:20:41 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute transfer2022 ms
+INFO  | 2023-02-03 12:20:41 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:20:41 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts1 ms
+WARN  | 2023-02-03 12:22:14 | [main] support.AbstractApplicationContext (AbstractApplicationContext.java:559) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'accountDaoMapImpl' defined in file [C:\shl_stuff\spring\core\bankapp-04-xml\target\classes\com\bankapp\repository\AccountDaoMapImpl.class]: Initialization of bean failed; nested exception is java.lang.IllegalArgumentException: Pointcut is not well-formed: expecting '(' at character position 37
+execution( * com.bankapp.service.*.* *(..))
+                                     ^
+
+WARN  | 2023-02-03 12:22:32 | [main] support.AbstractApplicationContext (AbstractApplicationContext.java:559) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'accountDaoMapImpl' defined in file [C:\shl_stuff\spring\core\bankapp-04-xml\target\classes\com\bankapp\repository\AccountDaoMapImpl.class]: Initialization of bean failed; nested exception is java.lang.IllegalArgumentException: Pointcut is not well-formed: expecting '(' at character position 35
+execution( * com.bankapp.service.* *(..))
+                                   ^
+
+WARN  | 2023-02-03 12:22:35 | [main] support.AbstractApplicationContext (AbstractApplicationContext.java:559) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'accountDaoMapImpl' defined in file [C:\shl_stuff\spring\core\bankapp-04-xml\target\classes\com\bankapp\repository\AccountDaoMapImpl.class]: Initialization of bean failed; nested exception is java.lang.IllegalArgumentException: Pointcut is not well-formed: expecting '(' at character position 35
+execution( * com.bankapp.service.* *(..))
+                                   ^
+
+INFO  | 2023-02-03 12:22:50 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:22:50 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts7 ms
+INFO  | 2023-02-03 12:22:51 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getById1008 ms
+INFO  | 2023-02-03 12:22:52 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getById1008 ms
+INFO  | 2023-02-03 12:22:52 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute updateAccount0 ms
+INFO  | 2023-02-03 12:22:52 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute updateAccount0 ms
+INFO  | 2023-02-03 12:22:52 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute transfer2017 ms
+INFO  | 2023-02-03 12:22:52 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:22:52 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+WARN  | 2023-02-03 12:23:39 | [main] support.AbstractApplicationContext (AbstractApplicationContext.java:559) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'accountDaoMapImpl' defined in file [C:\shl_stuff\spring\core\bankapp-04-xml\target\classes\com\bankapp\repository\AccountDaoMapImpl.class]: Initialization of bean failed; nested exception is java.lang.IllegalArgumentException: Pointcut is not well-formed: expecting '(' at character position 57
+execution( * com.bankapp.service.impl.AccountServiceImpl *(..))
+                                                         ^
+
+INFO  | 2023-02-03 12:25:09 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:25:11 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute transfer2006 ms
+INFO  | 2023-02-03 12:25:11 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:26:00 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:26:02 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute transfer2013 ms
+INFO  | 2023-02-03 12:26:02 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:26:32 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:26:34 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute transfer2027 ms
+INFO  | 2023-02-03 12:26:34 | [main] aspects.LoggingAspect (LoggingAspect.java:28) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:27:41 | [main] aspects.LoggingAspect (LoggingAspect.java:33) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:27:43 | [main] aspects.LoggingAspect (LoggingAspect.java:33) - time taken to execute transfer2019 ms
+INFO  | 2023-02-03 12:27:43 | [main] aspects.LoggingAspect (LoggingAspect.java:33) - time taken to execute getAllAccounts0 ms
+INFO  | 2023-02-03 12:33:14 | [main] aspects.LoggingAspect (LoggingAspect.java:29) - time taken to execute transfer2017 ms
+INFO  | 2023-02-03 12:40:08 | [main] aspects.LoggingAspect (LoggingAspect.java:30) - time taken to execute transfer2022 ms

@@ -1,0 +1,10 @@
+INFO  | 2023-02-02 16:48:37 | [main] controller.HelloLogging (HelloLogging.java:11) - code is working till line 6....
+ERROR | 2023-02-02 16:48:37 | [main] controller.HelloLogging (HelloLogging.java:17) - some no formate error
+INFO  | 2023-02-02 16:48:37 | [main] controller.HelloLogging (HelloLogging.java:20) - code is working till line 19....
+INFO  | 2023-02-02 16:54:39 | [main] impl.AccountServiceImpl (AccountServiceImpl.java:44) - time taken to execute transfer method is 0 ms
+INFO  | 2023-02-02 16:55:19 | [main] impl.AccountServiceImpl (AccountServiceImpl.java:44) - time taken to execute transfer method is 2014 ms
+WARN  | 2023-02-03 11:24:14 | [main] support.AbstractApplicationContext (AbstractApplicationContext.java:559) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'magician' defined in file [C:\shl_stuff\spring\core\demo-05\target\classes\com\demo\Magician.class]: Initialization of bean failed; nested exception is org.springframework.aop.framework.AopConfigException: Could not generate CGLIB subclass of class com.demo.Magician: Common causes of this problem include using a final class or a non-visible class; nested exception is java.lang.IllegalArgumentException: Cannot subclass final class com.demo.Magician
+WARN  | 2023-02-03 11:36:25 | [main] support.AbstractApplicationContext (AbstractApplicationContext.java:559) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'magician' defined in file [C:\shl_stuff\spring\core\demo-05\target\classes\com\demo\Magician.class]: Initialization of bean failed; nested exception is java.lang.IllegalArgumentException: Pointcut is not well-formed: expecting ')' at character position 16
+exection(public void doMagic())
+                ^^^^
+
