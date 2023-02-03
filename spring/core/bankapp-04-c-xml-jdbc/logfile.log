@@ -69,3 +69,6 @@ INFO  | 2023-02-03 12:27:41 | [main] aspects.LoggingAspect (LoggingAspect.java:3
 INFO  | 2023-02-03 12:27:43 | [main] aspects.LoggingAspect (LoggingAspect.java:33) - time taken to execute transfer2019 ms
 INFO  | 2023-02-03 12:27:43 | [main] aspects.LoggingAspect (LoggingAspect.java:33) - time taken to execute getAllAccounts0 ms
 INFO  | 2023-02-03 12:33:14 | [main] aspects.LoggingAspect (LoggingAspect.java:29) - time taken to execute transfer2017 ms
+INFO  | 2023-02-03 16:29:11 | [main] aspects.LoggingAspect (LoggingAspect.java:30) - time taken to execute transfer21 ms
+ERROR | 2023-02-03 16:31:51 | [main] aspects.LoggingAspect (LoggingAspect.java:42) - null
+ERROR | 2023-02-03 16:34:51 | [main] aspects.LoggingAspect (LoggingAspect.java:42) - null

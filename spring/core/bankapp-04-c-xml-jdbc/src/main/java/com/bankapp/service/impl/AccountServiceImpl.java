@@ -6,13 +6,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bankapp.exceptions.BankAccountNotFoundException;
+import com.bankapp.exceptions.FooEx;
 import com.bankapp.repository.Account;
 import com.bankapp.repository.AccountDao;
 import com.bankapp.service.AccountService;
 import com.bankapp.service.aspects.MyAppLogger;
 
+
+@Transactional
 @Service(value = "accountService")
 public class AccountServiceImpl implements AccountService{
 
@@ -25,6 +30,8 @@ public class AccountServiceImpl implements AccountService{
 		this.accountDao = accountDao;
 	}
 
+	
+	//@Transactional
 	@MyAppLogger
 	@Override
 	public void transfer(int fromAccId, int toAccId, double amount) {
@@ -35,7 +42,12 @@ public class AccountServiceImpl implements AccountService{
 		toAcc.setBalance(toAcc.getBalance()+amount);
 		
 		accountDao.updateAccount(fromAcc);
+		
+		if(1==1)
+			throw new FooEx();
+		
 		accountDao.updateAccount(toAcc);
+		
 	}
 
 	@Override

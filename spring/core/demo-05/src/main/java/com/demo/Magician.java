@@ -5,12 +5,16 @@ import org.springframework.stereotype.Component;
 @Component(value = "magician")
  public class Magician {
 	
-    public String doMagic(){
+    public void doMagic(){
         System.out.println("abra ka dabra...");
-        
-        return "rat from the hat";
       
     }
+    
+    public String flyBird(){
+        System.out.println("let fly the birds..."); 
+        return "parrot";
+    }
+    
     
     public void doEat(){
         System.out.println("eating the food...");

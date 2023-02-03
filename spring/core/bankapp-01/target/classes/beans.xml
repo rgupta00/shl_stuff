@@ -11,7 +11,7 @@
 		
 	</bean>
 	 
-	<bean id="ms1" class="com.bankapp.EmailService" autowire-candidate="false"/>
+	<bean id="ms1" class="com.bankapp.EmailService" primary="true"/>
 	<bean id="ms2" class="com.bankapp.SmsService"/>
 	
 </beans>

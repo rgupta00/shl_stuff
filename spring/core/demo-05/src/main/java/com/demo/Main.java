@@ -11,9 +11,10 @@ public class Main {
 		
 		Magician magician=ctx.getBean("magician",Magician.class);
 		
-		String val= magician.doMagic();
+		//magician.doMagic();
 		
-		System.out.println(val);
+		magician.flyBird();
+		
 		//magician.doEat();
 	}
 
