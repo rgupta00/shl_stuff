@@ -1,0 +1,1432 @@
+
+Spring boot bankapp step by step
+-----------------------------------
+
+
+History Spring boot : Summarized:
+_________________________________
+
+1.0.0: Support from Java 6 - 8
+1.3.0: Support from Java 7 - 8, additional configuration for Java 6 required
+2.0.0: Support from Java 8 - ...
+
+
+
+
+
+	Advantage of spring boot , configuration spring boot
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 	Advantage of spring boot
+	_____________________
+
+	=> Auto-Configuration 
+
+	=> Dependency Management
+
+	=> Externalized Configuration
+		bean can be configured through application.properties file 
+		without touching java or xml config
+
+	=> Production support
+		We get health checking, application and jvm metrics, 
+		jmx via http and a few more things for free
+
+	=> Runnable Jars
+		 We can package your application as a runnable jar with embedded tomcat
+		 included so it presents a self-contained deployment unit
+
+	=> Microservice
+
+
+	configuration spring boot
+	____________________
+
+	create spring boot project: choose web, jpa, derby....
+
+	//Configuration, @EnableAutoConfiguration and @ComponentScan
+
+
+
+	@SpringBootApplication
+	public class Application {
+	
+	  public static void main(String[] args) {
+	    ApplicationContext ctx = SpringApplication.run(Application.class, args);
+	
+	    System.out.println("Let's inspect the beans provided by Spring Boot:");
+	
+	    String[] beanNames = ctx.getBeanDefinitionNames();
+	    Arrays.sort(beanNames);
+	    for (String beanName : beanNames) {
+	        System.out.println(beanName);
+	    }
+	  }
+	
+	}
+
+	Hello world:
+	-----------
+
+	
+	@RestController
+	public class HelloRestController {
+		
+		@RequestMapping("/hello")
+		public String hello(){
+			return "spring boot";
+		}
+           }  
+	
+	public class Account {
+	    private int id;
+	    private String name;
+	    private BigDecimal balance;
+	    
+	}
+
+	
+	@GetMapping("accounts/{id}")
+	public Book getAccountById(@PathVariable(name = "id")int id) {
+		return new Account(id, "amit", new BigDecimal(300));
+	}
+
+
+
+
+
+	application.properties
+	---------------------------
+	server.servlet.context-path=/accountapp
+	server.port=8080
+
+
+
+Running spring boot :
+____________________
+
+	eclipse plugin
+	spring initilizer
+	spring cli
+
+	https://www.journaldev.com/8195/spring-boot-cli-setup-and-helloworld-example
+
+	spring init -n=jpa-one-to-one-demo -d=web,jpa,mysql --package-name=com.example.jpa demoproj
+
+
+bannner:
+________________
+spring.banner.location=classpath:banner.txt
+
+https://devops.datenkollektiv.de/banner.txt/index.html
+
+
+
+java -jar  demo.jar --server.port=8050
+
+https://docs.spring.io/spring-boot/docs/1.1.2.RELEASE/reference/html/common-application-properties.html
+
+
+
+Note:Spring boot config: EnableAutoConfiguration
+________________________________________________
+
+disable all database related auto configuration in spring-boot
+__________________________________________________________
+
+@Configuration
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+@Profile ("client_app_profile_name")
+public class ClientAppConfiguration {
+    //it can be left blank
+}
+
+
+
+
+Day 2: 
+
+session 1: spring boot rest crud application 
+___________________________________________
+
+Rest 
+Controller <------------ Service layer <---------- persistance layer <------ SessionFactory
+
+
+Agenda:
+===========
+-> Project structure bank application
+-> Step 1: creating basic fund transfer application with collection
+-> Step 2: with Spring data
+-> Step 3: Using ResponseEntity
+-> Step 4: Using Exception Handling
+-> Step 5: Using JSR 303
+-> 
+->
+-> 
+-> Step 6: Using Joins
+	Account transaction have TransactionHistories need to maintain
+	1		N
+	Acccount<>---------Loan
+	
+	1		N
+	Acccount<>---------Card
+	
+	
+=> spring security
+
+
+
+
+
+
+Step 1: creating basic fund transfer application with collection
+---------------------------------------------------------------
+
+
+A. Creating DAO layer
+--------------------------
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Account {
+    private int id;
+    private String name;
+    private BigDecimal balance;
+    
+    private String phone;
+    private String address;
+   
+
+public interface AccountDao {
+	public void update(Account account);
+	public Account find(int id);
+	public List<Account> getAllAccounts();
+}
+
+	
+
+public class AccountDaoImp implements AccountDao {
+
+	private Map<Integer, Account> accouts = new HashMap<Integer, Account>();{
+		accouts.put(1, new Account(1, "raja", new BigDecimal(1000),"6677110055","Delhi"));
+		accouts.put(2, new Account(2, "ravi", new BigDecimal(1000),"6677110011","Banglore"));
+	}
+
+	@Override
+	public void update(Account account) {
+		accouts.put(account.getId(), account);
+	}
+
+	@Override
+	public Account find(int id) {
+		return accouts.get(id);
+	}
+
+	public List<Account> getAllAccounts() {
+		return null;
+	}
+
+}
+
+
+
+@Data
+public class AccountUpdateDto {
+	private String phone;
+	private String address;
+}
+
+
+
+
+A. Creating Service layer
+--------------------------
+
+public interface AccountService {
+	public List<Account> getAll();
+	public Account getById(int id);
+	public void transfer(int fromAccId, int toAccId, BigDecimal amount);
+	public void deposit(int id , BigDecimal amount);
+	public void withdraw(int id , BigDecimal amount);
+	
+	public Account addAccount(Account account);
+	public void deleteAccount(int id);
+	
+	public Account updateAccount(int accId, AccountUpdateDto accountUpdateDto);
+}
+
+
+
+public class AccountServiceImp implements AccountService {
+
+	private AccountDao accountDao;
+
+	public void setAccountDao(AccountDao accountDao) {
+		this.accountDao = accountDao;
+	}
+
+	@Override
+	public void transfer(int from, int to, BigDecimal amount) {
+		Account fromAccount = accountDao.find(from);
+		Account toAccount = accountDao.find(to);
+
+		fromAccount.setBalance(fromAccount.getBalance().subtract(amount));
+		toAccount.setBalance(toAccount.getBalance().add(amount));
+
+		accountDao.update(fromAccount);
+		accountDao.update(toAccount);
+
+	}
+
+	@Override
+	public void deposit(int id, BigDecimal amount) {
+		Account account = accountDao.find(id);
+		account.setBalance(account.getBalance().add(amount));
+		accountDao.update(account);
+	}
+
+	@Override
+	public Account getById(int id) {
+		return accountDao.find(id);
+	}
+
+	public List<Account> getAllAccounts() {
+		return accountDao.getAllAccounts();
+	}
+
+	@Override
+	public void withdraw(int id, BigDecimal amount) {
+		Account account = accountDao.find(id);
+		account.setBalance(account.getBalance().add(amount));
+		accountDao.update(account);
+	}
+
+	@Override
+	public List<Account> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Account addAccount(Account account) {
+		return null;
+	}
+
+	@Override
+	public void deleteAccount(int id) {
+		
+	}
+
+	@Override
+	public Account updateAccount(int accId, AccountUpdateDto accountUpdateDto) {
+		return null;
+	}
+}
+
+
+C. Creating Controller layer
+--------------------------
+
+Note: We will create 2 controller one for Account crud operation (AccountCrudApi)
+and one for transaction operations (AccountTxApi)
+
+
+
+
+@RestController
+@RequestMapping("api")
+public class AccountCrudApi {
+
+	private AccountService accountService;
+
+	@Autowired
+	public AccountCrudApi(AccountService accountService) {
+		this.accountService = accountService;
+	}
+	
+	//--------get all accounts-----------
+	@GetMapping(path = "accounts")
+	public List<Account> getAll(){
+		return accountService.getAll();
+	}
+	
+	//--------get by account id-----------
+	@GetMapping(path = "accounts/{id}")
+	public Account getAnAccount(@PathVariable(name="id") int id){
+		return accountService.getById(id);
+	}
+	
+	
+	//--------add new account-----------
+	
+	//--------update account details-----------
+	
+	//-------delete an existing account-----------
+}
+
+Creating DTOs:
+-------------------
+
+
+@Data
+public class AccountUpdateDto {
+	private String phone;
+	private String address;
+}
+
+
+@Data
+public class DepositDto {
+	private int accId;
+	private BigDecimal amount;
+}
+
+
+
+@Data
+public class WithdrawDto {
+	private int accId;
+	private BigDecimal amount;
+}
+
+
+
+@Data
+public class TransferDto {
+	private int fromAccId;
+	private int toAccId;
+	private BigDecimal amount;
+}
+
+
+
+
+
+@RestController
+@RequestMapping("api")
+public class AccountTxApi {
+	private AccountService accountService;
+
+	@Autowired
+	public AccountTxApi(AccountService accountService) {
+		this.accountService = accountService;
+	}
+	
+	//--------transfer-----------
+	
+	@PostMapping(path = "transfer")
+	public String transfer(@RequestBody TransferDto transferDto) {
+		accountService.transfer(transferDto.getFromAccId(), transferDto.getToAccId(), transferDto.getAmount());
+		return "transfer is done";
+	}
+	
+	@PostMapping(path = "deposit")
+	public String deposit(@RequestBody  DepositDto depositDto) {
+		accountService.deposit(depositDto.getAccId(), depositDto.getAmount());
+		return "deposit done successfully";
+	}
+	
+	//--------withdraw-----------
+	@PostMapping(path = "withdraw")
+	public String withdraw(@RequestBody WithdrawDto withdrawDto) {
+		accountService.deposit(withdrawDto.getAccId(), withdrawDto.getAmount());
+		return "withdraw done successfully";
+	}
+}
+
+
+
+
+
+Step 2: creating basic fund transfer application with Spring data
+---------------------------------------------------------------
+
+
+server.port=8090
+server.servlet.context-path=/bankapp
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+# Custom H2 Console URL
+spring.h2.console.path=/h2
+
+spring.jpa.hibernate.ddl-auto=update
+
+logging.level.org.springframework.web: DEBUG
+logging.level.org.hibernate: ERROR
+
+spring.jpa.show-sql=true 
+
+
+
+
+applying annotation to entity :
+--------------------
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "account_table")
+public class Account {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    private BigDecimal balance;
+    
+    private String phone;
+	private String address;
+	public Account(String name, BigDecimal balance, String phone, String address) {
+		super();
+		this.name = name;
+		this.balance = balance;
+		this.phone = phone;
+		this.address = address;
+	} 
+}
+
+
+declaring repo layer:
+---------------------
+@Repository
+public interface AccountRepo extends JpaRepository<Account, Integer>{
+
+}
+
+
+change in service layer:
+-----------------------
+
+@Service
+@Transactional
+public class AccountServiceImp implements AccountService {
+
+	private AccountRepo accountRepo;
+
+	@Autowired
+	public AccountServiceImp(AccountRepo accountRepo) {
+		this.accountRepo = accountRepo;
+	}
+
+	@Override
+	public void transfer(int from, int to, BigDecimal amount) {
+		Account fromAccount = getById(from);
+		Account toAccount = getById(to);
+
+		fromAccount.setBalance(fromAccount.getBalance().subtract(amount));
+		toAccount.setBalance(toAccount.getBalance().add(amount));
+
+		accountRepo.save(fromAccount);
+		accountRepo.save(toAccount);
+
+	}
+
+	@Override
+	public void deposit(int id, BigDecimal amount) {
+		Account account = getById(id);
+		account.setBalance(account.getBalance().add(amount));
+		accountRepo.save(account);
+	}
+
+	@Override
+	public Account getById(int id) {
+		return accountRepo.findById(id)
+				.orElseThrow(()-> new BankAccountNotFoundException("account with id "+ id +" is not found"));
+	}
+
+	@Override
+	public void withdraw(int id, BigDecimal amount) {
+		Account account = accountRepo.getById(id);
+		account.setBalance(account.getBalance().add(amount));
+		accountRepo.save(account);
+	}
+
+	@Override
+	public List<Account> getAll() {
+		return accountRepo.findAll();
+	}
+
+	@Override
+	public Account addAccount(Account account) {
+		accountRepo.save(account);
+		return account;
+	}
+
+	@Override
+	public void deleteAccount(int id) {
+		Account accountToDelete= getById(id);
+		accountRepo.delete(accountToDelete);
+	}
+
+	@Override
+	public Account updateAccount(int accId, AccountUpdateDto accountUpdateDto) {
+		Account accountToUpdate= getById(accId);
+		accountToUpdate.setAddress(accountUpdateDto.getAddress());
+		accountToUpdate.setPhone(accountUpdateDto.getPhone());
+		accountRepo.save(accountToUpdate);
+		return accountToUpdate;
+	}
+}
+
+
+
+changes in controllers:
+------------------------
+http://localhost:8090/bankapp/api/accounts
+
+
+
+
+@RestController
+@RequestMapping("api")
+public class AccountCrudApi {
+
+	private AccountService accountService;
+
+	@Autowired
+	public AccountCrudApi(AccountService accountService) {
+		this.accountService = accountService;
+	}
+
+	// --------get all accounts-----------
+	@GetMapping(path = "accounts")
+	public List<Account> getAll() {
+		return accountService.getAll();
+	}
+
+	// --------get by account id-----------
+	@GetMapping(path = "accounts/{id}")
+	public Account getAnAccount(@PathVariable(name = "id") int id) {
+		return accountService.getById(id);
+	}
+
+	// --------add new account-----------
+
+	@PostMapping(path = "accounts")
+	public Account addAccount(@RequestBody Account account) {
+		return accountService.addAccount(account);
+	}
+
+	// --------update account details-----------
+
+	@PutMapping(path = "accounts/{id}")
+	public Account updateAccount(@PathVariable(name = "id") int id, @RequestBody AccountUpdateDto accountUpdateDto) {
+		return accountService.updateAccount(id, accountUpdateDto);
+	}
+	
+
+	// -------delete an existing account-----------
+	@DeleteMapping(path = "accounts/{id}")
+	public ResponseEntity<Void> deleteAnAccount(@PathVariable(name = "id") int id) {
+		accountService.deleteAccount(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+
+}
+
+
+
+
+changes in controllers:
+------------------------
+
+http://localhost:8090/bankapp/api/transfer
+
+{
+    "fromAccId": 1,
+    "toAccId": 2,
+    "amount":100
+}
+
+
+http://localhost:8090/bankapp/api/deposit
+{
+    "accId": 1,
+    "amount":100
+}
+
+
+http://localhost:8090/bankapp/api/withdraw
+{
+    "accId": 1,
+    "amount":100
+}
+
+@RestController
+@RequestMapping("api")
+public class AccountTxApi {
+	private AccountService accountService;
+
+	@Autowired
+	public AccountTxApi(AccountService accountService) {
+		this.accountService = accountService;
+	}
+	
+	//--------transfer-----------
+	
+	@PostMapping(path = "transfer")
+	public String transfer(@RequestBody TransferDto transferDto) {
+		accountService.transfer(transferDto.getFromAccId(), transferDto.getToAccId(), transferDto.getAmount());
+		return "transfer is done";
+	}
+	
+	@PostMapping(path = "deposit")
+	public String deposit(@RequestBody  DepositDto depositDto) {
+		accountService.deposit(depositDto.getAccId(), depositDto.getAmount());
+		return "deposit done successfully";
+	}
+	
+	//--------withdraw-----------
+	@PostMapping(path = "withdraw")
+	public String withdraw(@RequestBody WithdrawDto withdrawDto) {
+		accountService.deposit(withdrawDto.getAccId(), withdrawDto.getAmount());
+		return "withdraw done successfully";
+	}
+}
+
+
+
+ Step 3: Using ResponseEntity
+ -------------------------------
+// --------add new account-----------
+	@PostMapping(path = "accounts")
+	public ResponseEntity<Account> addAccount(@RequestBody Account account) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(accountService.addAccount(account));
+	}
+
+	// -------delete an existing account-----------
+	@GetMapping(path = "accounts/{id}")
+	public ResponseEntity<Void> deleteAnAccount(@PathVariable(name = "id") int id) {
+		accountService.deleteAccount(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+	
+	
+	
+Step 4: Using Exception Handling
+-----------------------------------
+What if we are accessing account that dont exist?
+http://localhost:8090/bankapp/api/accounts/55
+
+
+changing the status code :
+-----------------------------
+
+@ResponseStatus(code = HttpStatus.NOT_FOUND)
+public class BankAccountNotFoundException extends RuntimeException {
+	private static final long serialVersionUID = 6115120847499794478L;
+
+	public BankAccountNotFoundException(String message) {
+		super(message);
+	}
+}
+
+
+write exception handler:
+----------------------------
+
+@Data
+public class ErrorInfoDto {
+	private String message;
+	private String errorcode;
+	private String tocontact;
+	private LocalDateTime dateTime;
+}
+
+
+
+
+
+@RestControllerAdvice
+public class BankAppExceptionHandler {
+
+	@ExceptionHandler(BankAccountNotFoundException.class)
+	public ResponseEntity<ErrorInfoDto> handle404(BankAccountNotFoundException  exception){
+		ErrorInfoDto dto=new ErrorInfoDto();
+		
+		dto.setDateTime(LocalDateTime.now());
+		dto.setErrorcode("404");
+		dto.setMessage(exception.getMessage());
+		dto.setTocontact("rgupta.mtech@gmail.com");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(dto);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ErrorInfoDto> handle500(Exception  exception){
+		ErrorInfoDto dto=new ErrorInfoDto();
+		
+		dto.setDateTime(LocalDateTime.now());
+		dto.setErrorcode("500");
+		dto.setMessage("try after some time");
+		dto.setTocontact("rgupta.mtech@gmail.com");
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(dto);
+	}
+}
+
+
+
+
+
+
+
+
+Step 5: Using JSR 303
+---------------------
+
+ provide validation dependency:
+
+
+ apply validation annotations on pojo
+ 
+ 
+ 
+public class Account {
+	//..........
+   
+	@NotNull(message = "{account.name.absent}")
+	@Pattern(regexp = "[A-Za-z]+( [A-Za-z]+)*", message = "{account.name.invalid}")
+	@Column(name = "acc_name")
+	private String name;
+
+	@NotNull(message = "{account.balance.absent}")
+	@Range(min = 100, max = 100000, message = "{account.balance.invalid}")
+	@Column(name = "acc_balance")
+	private BigDecimal balance;
+	
+	//...........
+}
+
+
+apply @Valid  annotations inside post method
+
+
+@PostMapping(path = "accounts")
+	public ResponseEntity<Account> addAccount(@RequestBody @Valid Account  account) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(accountService.addAccount(account));
+}
+	
+
+
+Dont hard code the messages
+
+
+ValidationMessages.properties
+--------------------------------
+
+account.email.absent=Please provide email address
+account.email.invalid=Please provide valid email address
+
+account.name.absent=Please provide customer name!!
+account.name.invalid=Name should contain only alphabets and space
+
+account.phone.absent=Please provide phone 
+account.phone.invalid=Please provide correct phone number of 10 digits
+
+account.balance.absent=Please provide initial balance 
+account.balance.invalid=Please provide correct initial balance bw 100 to 100000
+
+
+define the handler to handle MethodArgumentNotValidException exception
+
+// MethodArgumentNotValidException
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ErrorInfoDto> handle400(MethodArgumentNotValidException exception) {
+		ErrorInfoDto dto = new ErrorInfoDto();
+		dto.setDateTime(LocalDateTime.now());
+		dto.setErrorcode("400");
+		dto.setTocontact("admin.oracle@oracle.com");
+		// extract out the validation message
+		String errorMessage = exception.getBindingResult().getAllErrors().stream().map(x -> x.getDefaultMessage())
+				.collect(Collectors.joining(" ,"));
+
+		dto.setMessage(errorMessage);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
+	}
+	
+	
+
+
+
+
+
+
+
+
+Step 6: Using OpenAPI 3.0
+------------------
+
+=> Documenting a Spring REST API Using OpenAPI 3.0
+=>Swagger is almost equivalent to SOAP formate, used for documentation of REST api
+
+	Step 1:
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+
+	Step 2:
+
+	http://localhost:8090/bookapp/v3/api-docs
+	
+	http://localhost:8090/bookapp/swagger-ui/index.html
+
+	http://localhost:8090/bookapp/v3/api-docs.yaml
+
+	Step 3:
+	Customization location
+	springdoc.swagger-ui.path=/swagger-ui-bookapp.html
+
+	@OpenAPIDefinition(info = @Info(title = "bookapp API", version = "2.0" , description = "YMSLI bookapp API"))
+	public class BookappApplication implements CommandLineRunner {
+	}
+
+
+
+
+Step 7: web application with boot
+____________________________
+
+1. We need to put dependency:
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+
+2. We need to configure view resolver
+
+spring.mvc.view.prefix:/WEB-INF/views/
+spring.mvc.view.suffix:.jsp
+
+
+3. define controller 
+
+@Controller
+public class ProductController {
+	
+	private ProductService productService;
+
+	@Autowired
+	public ProductController(ProductService productService) {
+		this.productService = productService;
+	}
+	
+	@GetMapping("products")
+	public ModelAndView allProducts(ModelAndView mv) {
+		mv.setViewName("products");
+		mv.addObject("products", productService.findAll());
+		
+		return mv;
+	}
+}
+
+put jsp in /bootapp/src/main/webapp/WEB-INF/views
+
+
+4. define jsp view 
+
+<table>
+	<thead>
+		<tr>
+			<th>product id</th>
+			<th>product name</th>
+			<th>product price</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${products}" var="product">
+			<tr>
+				<td>${product.id }</td>
+				<td>${product.name }</td>
+				<td>${product.price }</td>
+			</tr>
+		</c:forEach>
+	</tbody>
+</table>
+
+
+
+Step 8: Converting jar to war and deploy over tomcat
+------------------------------------------------
+
+
+
+
+Step 9: Using Joins
+--------------------
+
+	Account transaction have TransactionHistories need to maintain
+	1		N
+	Acccount<>---------Loan
+	
+	1		N
+	Acccount<>---------Card
+	
+	
+	
+	
+We want to save transaction history when transction happens:
+------------------------------------------------------------
+	
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode
+@Entity
+@Table(name = "tx_history_table")
+public class TransactionHistory {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int txId;
+	
+	private int fromAccId;
+	private int toAccId;
+	private BigDecimal amount;
+	private String txType;
+	private LocalDateTime dateTime;
+	
+	public TransactionHistory(int fromAccId, int toAccId, BigDecimal amount, String txType, LocalDateTime dateTime) {
+		this.fromAccId = fromAccId;
+		this.toAccId = toAccId;
+		this.amount = amount;
+		this.txType = txType;
+		this.dateTime = dateTime;
+	}
+}
+
+
+@Repository
+public interface TransactionHistoryRepo extends JpaRepository<TransactionHistory, Integer>{
+	List<TransactionHistory> findByFromAccIdOrToAccId(int accountId, int accountId2);
+}
+
+
+public interface TransactionHistoryService {
+	public void addTransactionHistory(TransactionHistory transactionHistory);
+	public List<TransactionHistory> getAllTransactionHistory();
+	public List<TransactionHistory>  findByAccountId(int accountId);
+}
+
+
+
+@Service
+@Transactional
+public class TransactionHistoryServiceImpl implements TransactionHistoryService {
+
+	private TransactionHistoryRepo transactionHistoryRepo;
+
+	@Autowired
+	public TransactionHistoryServiceImpl(TransactionHistoryRepo transactionHistoryRepo) {
+		this.transactionHistoryRepo = transactionHistoryRepo;
+	}
+
+	@Override
+	public List<TransactionHistory> getAllTransactionHistory() {
+		return transactionHistoryRepo.findAll();
+	}
+
+	@Override
+	public List<TransactionHistory> findByAccountId(int accountId) {
+		return transactionHistoryRepo.findByFromAccIdOrToAccId(accountId ,accountId);
+	}
+
+	@Override
+	public void addTransactionHistory(TransactionHistory transactionHistory) {
+		transactionHistoryRepo.save(transactionHistory);
+	}
+
+}
+
+
+
+@Transactional
+@Service(value = "accountService")
+public class AccountServiceImpl implements AccountService {
+
+	private AccountRepo accountRepo;
+
+	private TransactionHistoryService transactionHistoryService;
+	
+
+	public AccountServiceImpl(AccountRepo accountRepo, TransactionHistoryService transactionHistoryService) {
+		this.accountRepo = accountRepo;
+		this.transactionHistoryService = transactionHistoryService;
+	}
+
+	@Override
+	public List<Account> getAll() {
+		return accountRepo.findAll();
+	}
+
+	@Override
+	public Account getById(int id) {
+		return accountRepo.findById(id)
+				.orElseThrow(() -> new BankAppException("bank account " + id + " is not found"));
+	}
+
+	@MyLogging
+	@Override
+	public void transfer(int fromAccId, int toAccId, BigDecimal amount) {
+
+		Account fromAcc = getById(fromAccId);
+
+		Account toAcc = getById(toAccId);
+
+		fromAcc.setBalance(fromAcc.getBalance().subtract(amount));
+
+		toAcc.setBalance(toAcc.getBalance().add(amount));
+
+		accountRepo.save(fromAcc);
+
+		accountRepo.save(toAcc);
+		
+		transactionHistoryService
+		.addTransactionHistory(new TransactionHistory(fromAccId, toAccId, amount, "transfer", LocalDateTime.now()));
+
+	}
+
+	@Override
+	public void deposit(int id, BigDecimal amount) {
+		Account acc = getById(id);
+		acc.setBalance(acc.getBalance().add(amount));
+		accountRepo.save(acc);
+		transactionHistoryService
+		.addTransactionHistory(new TransactionHistory(id, id, amount, "deposit", LocalDateTime.now()));
+	}
+
+	@Override
+	public void withdraw(int id, BigDecimal amount) {
+		Account acc = getById(id);
+
+		acc.setBalance(acc.getBalance().subtract(amount));
+		accountRepo.save(acc);
+		
+		transactionHistoryService
+		.addTransactionHistory(new TransactionHistory( id, id, amount, "withdraw", LocalDateTime.now()));
+	}
+
+	@Override
+	public Account addAccount(Account account) {
+		accountRepo.save(account);
+		return account;
+	}
+
+	@Override
+	public void deleteAccount(int id) {
+		Account account=getById(id);
+		accountRepo.delete(account);
+	}
+
+	@Override
+	public Account updateAccount(int accId, AccountUpdateDto accountUpdateDto) {
+		Account accountToUpdate=getById(accId);
+		accountToUpdate.setAddress(accountUpdateDto.getAddress());
+		accountToUpdate.setPhone(accountUpdateDto.getPhone());
+		accountRepo.save(accountToUpdate);
+		
+		return accountToUpdate;
+	}
+}
+
+
+@RestController
+@RequestMapping(path = "api")
+public class AccountTxRestApi {
+
+	//..........................
+	
+	@GetMapping(path = "transactionHistories")
+	public List<TransactionHistory> allAccountsTransactionHistories() {
+		return transactionHistoryService.getAllTransactionHistory();
+	}
+
+	@GetMapping(path = "transactionHistories/{id}")
+	public List<TransactionHistory> allAccountsTransactionHistoriesByAccountId(@PathVariable(name = "id") int id) {
+		return transactionHistoryService.findByAccountId(id);
+	}
+	//......................
+}
+	
+
+
+
+=>Step 10: spring security
+-------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+->Spring Hibernate
+
+application.properties
+----------------------------
+server.port=8080
+server.servlet.context-path=/bankapp
+
+logging.level.org.springframework.web: DEBUG
+logging.level.org.hibernate: ERROR
+spring.jpa.show-sql=true
+
+spring.datasource.url= jdbc:mysql://localhost:3306/jug?verifyServerCertificate=false&useSSL=true
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=create-drop
+
+
+steps :
+0. populate some rec in account table
+insert into account(id, balance, name) values (1,100,"A");
+insert into account(id, balance, name) values (2,100,"B");
+1. annotate pojo
+
+@Entity
+public class Account {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	private String name;
+	private int balance;
+
+2. create AccountDaoImp using hibernate
+
+
+@Repository
+public class AccountDaoImpUsingHib implements AccountDao{
+
+	@PersistenceContext
+	private EntityManager em;
+	
+	@Override
+	public void update(Account account) {
+		if(account!=null)
+			em.merge(account);
+	}
+
+	@Override
+	public Account find(int id) {
+		return em.find(Account.class, id);
+	}
+
+	public List<Account> getAllAccounts(){
+		return em.createQuery("from Account", Account.class).getResultList();
+	}
+}
+
+
+put @Transactional to service layer...
+
+3.test it
+
+
+
+public class DemoApplication implements CommandLineRunner {
+
+	@Autowired
+	private AccountService as;
+	
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+	/*List<Account> accounts=as.getAllAccounts();
+		for(Account a: accounts)
+			System.out.println(a.getName());*/
+
+		as.transfer(1, 2, 10);
+		System.out.println("done");
+	}
+	
+	
+}
+
+
+
+
+
+Session 2
+-----------
+Spring rest
+-----------
+@RestController
+public class AccountRestController {
+
+	@Autowired
+	private AccountService accountService;
+
+	@RequestMapping(value = "/api/accounts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<Account>> getAllAccounts() {
+		Collection<Account> accounts = accountService.getAllAccounts();
+		return new ResponseEntity<Collection<Account>>(accounts, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/api/accounts/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Account> getAnAccount(@PathVariable Integer id) {
+		Account account = accountService.getAccount(id);
+		if (account == null) {
+			return new ResponseEntity<Account>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<Account>(account, HttpStatus.OK);
+	}
+
+	// /api/transfer?from=1&to=2&amount=10
+	@RequestMapping(value = "/api/transfer", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Account> transferFund(@RequestParam("from")Integer from, @RequestParam("to") Integer to
+			,@RequestParam("amount")Integer amount ) {
+		
+		accountService.transfer(from, to, amount);
+		
+		return new ResponseEntity<Account>(HttpStatus.OK);
+	}
+}
+
+
+Spring MVC with jsp as view :
+----------------------------
+
+
+Step 1: add dependencies
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+	<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+
+
+Step 2: add to property file
+
+spring.mvc.view.prefix:/WEB-INF/views/
+spring.mvc.view.suffix:.jsp
+
+
+
+
+step 3: test with hello controller
+
+@Controller
+public class TestController {
+
+	@RequestMapping("/welcome.html")
+	public ModelAndView firstPage() {
+		return new ModelAndView("welcome");
+	}
+
+}
+
+put jsp in /bootapp/src/main/webapp/WEB-INF/views
+
+
+
+
+
+Now bank application with spring boot jsp
+-------------------------------------
+
+create an backing form bean:
+
+public class AccountBean {
+	private int from;
+	private int to;
+	private int money;
+}
+
+
+
+
+@Controller
+public class AccountController {
+
+	@Autowired
+	private AccountService service;
+
+	@RequestMapping(value = "/transfer", method = RequestMethod.GET)
+	public String showAccountTransferForm(ModelMap map) {
+		
+		map.addAttribute("accountBean", new AccountBean());
+		return "accountform";
+	}
+
+	@RequestMapping(value = "/transfer" ,method = RequestMethod.POST)
+	public ModelAndView submittedAccountTransferForm(AccountBean accountBean) {
+		
+		service.transfer(accountBean.getFrom(), accountBean.getTo(), accountBean.getMoney());
+		return new ModelAndView("transfersuccess", "accountBean", accountBean);
+	}
+}
+
+
+
+view layer:
+------------
+accountform.jsp
+-----------------
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
+
+<form:form action="transfer" method="post" modelAttribute="accountBean">
+	Enter from account:<form:input path="from"/><br/>
+	Enter to amount:<form:input path="to"/><br/>
+	Enter money to transfer:<form:input path="money"/><br/>
+	<input type ="submit"/>
+</form:form>
+
+
+
+
+transfersuccess.jsp
+-----------------
+${accountBean.from }<br/>
+${accountBean.to }<br/>
+${accountBean.money }<br/>
+
+
+
+
+Spring security configuration with spring boot:
+-----------------------------------------------
+why not tomcat/weblogic security?
+-----------------------------------------
+
+Spring provide: url , method and object level security
+
+
+
+Configuration hello world:
+--------------------------
+
+spring.security.user.name=raj
+spring.security.user.password=raj
+

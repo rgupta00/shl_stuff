@@ -1,0 +1,27 @@
+productId;
+private String productName;
+private double productPrice;
+private int productQty;
+private String productCategory;
+
+
+
+create table products(
+productId int not null AUTO_INCREMENT,
+productName char(40) not null, 
+productPrice double not null, 
+ productQty int not null,
+ productCategory char(40) not null, primary key(productId)
+);
+
+insert into products(productName,productPrice,productQty,productCategory) values ('rich dad poor dad',200,20,'books');
+insert into products(productName,productPrice,productQty,productCategory) values ('monk who sold his farrari',300,20,'books');
+
+insert into products(productName,productPrice,productQty,productCategory) values ('acer laptop i3',34000,1200,'electronics');
+insert into products(productName,productPrice,productQty,productCategory) values ('laptop cool pad',3400,120,'electronics');
+
+insert into products(productName,productPrice,productQty,productCategory) values ('A4 paper bundle',200,20,'stationary');
+insert into products(productName,productPrice,productQty,productCategory) values ('Markers',270,40,'stationary');
+
+
+
