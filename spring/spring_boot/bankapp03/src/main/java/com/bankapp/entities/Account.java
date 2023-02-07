@@ -29,6 +29,16 @@ public class Account {
 	
 	@Column(name = "acc_holder_address", nullable = false, length = 100)
     private String address;
+
+	public Account(String name, BigDecimal balance, String phone, String address) {
+		super();
+		this.name = name;
+		this.balance = balance;
+		this.phone = phone;
+		this.address = address;
+	}
+	
+	
 }
 
 
