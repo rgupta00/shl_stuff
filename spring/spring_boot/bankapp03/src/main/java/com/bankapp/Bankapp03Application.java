@@ -32,7 +32,7 @@ public class Bankapp03Application{
 //			accountService.saveAccount(new Account("sumit", new BigDecimal(2000.00), "6565656656", "delhi"));
 //			accountService.saveAccount(new Account("amit", new BigDecimal(2500.00), "6505656656", "banglore"));
 //			
-			
+//			
 			
 			System.out.println("-------------------");
 			
