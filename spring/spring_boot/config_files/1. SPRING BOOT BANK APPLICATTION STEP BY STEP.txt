@@ -1166,6 +1166,412 @@ public class AccountTxRestApi {
 
 
 
+Spring security:
+--------------------
+step 1: put spring sec dependency
+
+step 2: customization of speing security
+
+
+@Component
+@EnableWebSecurity//(debug = true)
+public class SecConfig extends WebSecurityConfigurerAdapter{
+	
+	//used to do authentication 401
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		//auth.userDetailsService(userDetails);
+		
+		auth.inMemoryAuthentication()
+		.withUser("raj").password("raj123").roles("ADMIN")
+		.and()
+		.withUser("ekta").password("ekta123").roles("MGR");
+	}
+	@Bean
+	public PasswordEncoder encoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring()
+		.antMatchers("/h2/**");
+	}
+
+	//used to do autherization 403
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable()
+		.authorizeRequests()
+		.antMatchers("/products/**").hasAnyRole("ADMIN","MGR")
+		.antMatchers("/home/**").permitAll()
+		.and()
+		.httpBasic()
+		.and()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
+	}
+
+	
+	
+}
+
+
+step 3: spring security jpa
+
+@Data
+@NoArgsConstructor
+@ToString
+@Entity
+@Table(name = "user_table")
+public class UserEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(unique = true, nullable = false)
+	private String username;
+	private String password;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name="user_roles")
+	private List<String> roles= new ArrayList<>();
+
+	public UserEntity(String username, String password, List<String> roles) {
+		this.username = username;
+		this.password = password;
+		this.roles = roles;
+	}
+	
+}
+
+
+@Repository
+public interface UserEntityRepo extends JpaRepository<UserEntity, Integer>{
+	public UserEntity findByUsername(String username);
+}
+
+
+public interface UserService {
+	public UserEntity findByUsername(String username);
+	public void addUserEntity(UserEntity userEntity);
+}
+
+
+
+@Service
+@Transactional
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserEntityRepo entityRepo;
+	
+	@Override
+	public UserEntity findByUsername(String username) {
+		return entityRepo.findByUsername(username);
+	}
+
+	@Override
+	public void addUserEntity(UserEntity userEntity) {
+		entityRepo.save(userEntity);
+	}
+
+}
+
+
+
+@SpringBootApplication
+public class ProductappApplication implements CommandLineRunner {
+
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private UserService userService;
+	
+	
+	public static void main(String[] args) {
+		SpringApplication.run(ProductappApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		productService.addProduct(new Product("laptop", new BigDecimal(100000),"raj"));
+		productService.addProduct(new Product("laptop mouse", new BigDecimal(1000),"ekta"));
+		
+		userService.addUserEntity(new UserEntity("raj", "raj123",Arrays.asList("ROLE_ADMIN","ROLE_MGR")));
+		userService.addUserEntity(new UserEntity("ekta", "ekta123",Arrays.asList("ROLE_MGR")) );
+		
+		System.out.println("------------------------------------------------");
+	}
+
+}
+
+
+@Component
+public class SecUserDetailService implements UserDetailsService {
+
+	@Autowired
+	private UserService userService;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		UserEntity userEntity= userService.findByUsername(username);
+		if(userEntity==null)
+			throw new UsernameNotFoundException("user not found");
+		//convert UserEntity to the user that can be understand by spring security
+		
+		
+		return new SecUser(userEntity);
+	}
+
+}
+
+
+
+public class SecUser implements UserDetails{
+
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	private UserEntity userEntity;
+	
+	
+	
+	public SecUser(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
+
+	public SecUser() {}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<String> roles= userEntity.getRoles();
+		String rolesNames[]=roles.toArray(new String[roles.size()]);
+		return AuthorityUtils.createAuthorityList(rolesNames);
+	}
+
+	@Override
+	public String getPassword() {
+		return userEntity.getPassword();
+	}
+
+	@Override
+	public String getUsername() {
+		return userEntity.getUsername();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+}
+
+
+
+
+@Component
+@EnableWebSecurity//(debug = true)
+public class SecConfig extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	private UserDetailsService detailsService;
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(detailsService);
+	}
+	//...........
+	
+}
+
+
+
+we must use password encoder:
+-------------------------------
+
+@Component
+@EnableWebSecurity//(debug = true)
+public class SecConfig extends WebSecurityConfigurerAdapter{
+	
+	//----------
+	
+	@Bean
+	public PasswordEncoder encoder() {
+		return new BCryptPasswordEncoder();
+	}
+	//...........
+	
+}
+
+
+@Service
+@Transactional
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private PasswordEncoder encoder;
+	
+	//.................
+
+	@Override
+	public void addUserEntity(UserEntity userEntity) {
+		userEntity.setPassword(encoder.encode(userEntity.getPassword()));
+		entityRepo.save(userEntity);
+	}
+	
+	//..............
+
+}
+
+	
+
+
+method level security:
+----------------------
+
+spring sec?
+-----------
+url pattern
+
+method level sec (AOP)
+object level sec
+
+
+step 1:
+
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
+@SpringBootApplication
+
+
+step 2:
+------------
+
+public class SecConfig extends WebSecurityConfigurerAdapter{
+	//---------
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable()
+		.authorizeRequests()
+		.anyRequest().authenticated()
+		.and()
+		.httpBasic()
+		.and()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	}
+	//---------
+}
+
+
+step 3:
+---------
+
+
+public interface ProductService {
+	@PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_MGR')")
+	public List<Product> findAll();
+	
+	@PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_MGR')")
+	public Product getById(int id);
+	
+	//@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public Product addProduct(Product product);
+	
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public Product updateProduct(int id, Product product);
+	
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	//@PostAuthorize("returnObject.vendorName==authentication.name")
+	//@Secured({"ROLE_ADMIN","ROLE_MGR"})
+	public Product deleteProduct(int id);
+	
+}
+
+step 4: write handler for it
+--------------------------
+
+ @ExceptionHandler(AccessDeniedException.class)
+    public final ResponseEntity<ErrorDetails> handleAccessDeniedException(AccessDeniedException ex) {
+    	ErrorDetails details = new ErrorDetails();
+		details.setDate(LocalDateTime.now());
+		details.setName("rgupta.mtech@gmail.com");
+		details.setDetails(ex.getMessage());
+        return new ResponseEntity<>(details, HttpStatus.FORBIDDEN);
+   }
+    
+
+
+
+@Component
+public class AppAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+    }
+
+}
+
+
+@Configuration
+public class CorsConfiguration {
+
+    private static final String GET = "GET";
+    private static final String POST = "POST";
+    private static final String PUT = "PUT";
+    private static final String DELETE = "DELETE";
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods(GET, POST, PUT, DELETE)
+                        .allowedHeaders("*")
+                        .allowedOriginPatterns("*")
+                        .allowCredentials(true);
+            }
+        };
+    }
+}
+
+
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors();
+		http.csrf().disable().authorizeRequests()
+		.anyRequest().authenticated()
+		.and()
+		.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+		.and().sessionManagement()
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	}
+
+Note : to get currently loggedin user in controller layer user
+@authenticationprincipal
+
+
+
+
+
+
 
 
 
