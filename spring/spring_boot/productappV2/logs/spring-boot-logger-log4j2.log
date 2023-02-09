@@ -1,0 +1,57 @@
+2023-02-08 14:53:58,454 INFO o.s.b.StartupInfoLogger [restartedMain] Starting ProductappApplication using Java 11.0.1 on raj-Aspire-E5-575G with PID 8358 (/home/raj/Desktop/shl_stuff/spring/spring_boot/productappV2/target/classes started by raj in /home/raj/Desktop/shl_stuff/spring/spring_boot/productappV2)
+2023-02-08 14:53:58,463 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-02-08 14:53:58,531 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-08 14:53:58,531 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-08 14:53:59,297 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-08 14:53:59,348 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 41 ms. Found 1 JPA repository interfaces.
+2023-02-08 14:54:00,067 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8090 (http)
+2023-02-08 14:54:00,075 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8090"]
+2023-02-08 14:54:00,076 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-02-08 14:54:00,077 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-02-08 14:54:00,308 INFO o.a.j.l.DirectJDKLog [restartedMain] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-02-08 14:54:00,317 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-02-08 14:54:00,317 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1785 ms
+2023-02-08 14:54:00,360 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-02-08 14:54:00,461 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-02-08 14:54:00,472 INFO o.s.b.a.h.H2ConsoleAutoConfiguration [restartedMain] H2 console available at '/h2'. Database available at 'jdbc:h2:mem:testdb'
+2023-02-08 14:54:01,311 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-08 14:54:01,805 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-08 14:54:01,976 DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter [restartedMain] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-02-08 14:54:02,044 DEBUG o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 11 mappings in 'requestMappingHandlerMapping'
+2023-02-08 14:54:02,491 DEBUG o.s.w.s.h.SimpleUrlHandlerMapping [restartedMain] Patterns [/webjars/**, /**, /swagger-ui*/**] in 'resourceHandlerMapping'
+2023-02-08 14:54:02,503 DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver [restartedMain] ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-02-08 14:54:02,721 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-02-08 14:54:02,743 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8090"]
+2023-02-08 14:54:02,763 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8090 (http) with context path '/productapp'
+2023-02-08 14:54:02,777 INFO o.s.b.StartupInfoLogger [restartedMain] Started ProductappApplication in 4.805 seconds (JVM running for 5.691)
+2023-02-08 14:54:02,785 INFO c.p.u.LoggingAspect [restartedMain] logged is done
+2023-02-08 14:54:02,785 INFO c.p.u.LoggingAspect [restartedMain] --------------------
+2023-02-08 14:54:02,850 INFO c.p.u.LoggingAspect [restartedMain] time taken: 65 ms
+2023-02-08 14:54:02,856 INFO c.p.u.LoggingAspect [restartedMain] logged is done
+2023-02-08 14:54:02,857 INFO c.p.u.LoggingAspect [restartedMain] --------------------
+2023-02-08 14:54:02,858 INFO c.p.u.LoggingAspect [restartedMain] time taken: 2 ms
+2023-02-08 14:54:02,859 INFO c.p.u.LoggingAspect [restartedMain] logged is done
+2023-02-08 14:54:02,860 INFO c.p.u.LoggingAspect [restartedMain] --------------------
+2023-02-08 14:54:02,861 INFO c.p.u.LoggingAspect [restartedMain] time taken: 2 ms
+2023-02-08 14:54:02,862 INFO c.p.u.LoggingAspect [restartedMain] logged is done
+2023-02-08 14:54:02,862 INFO c.p.u.LoggingAspect [restartedMain] --------------------
+2023-02-08 14:54:02,863 INFO c.p.u.LoggingAspect [restartedMain] time taken: 1 ms
+2023-02-08 15:00:46,216 INFO o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin [RMI TCP Connection(2)-127.0.0.1] Application shutdown requested.
+2023-02-08 15:00:46,249 INFO o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] Pausing ProtocolHandler ["http-nio-8090"]
+2023-02-08 15:00:46,249 INFO o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] Stopping service [Tomcat]
+2023-02-08 15:00:46,271 WARN o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] The web application [productapp] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@11.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@11.0.1/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:234)
+ java.base@11.0.1/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2123)
+ java.base@11.0.1/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base@11.0.1/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base@11.0.1/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+ java.base@11.0.1/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+ java.base@11.0.1/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+ java.base@11.0.1/java.lang.Thread.run(Thread.java:834)
+2023-02-08 15:00:46,273 INFO o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] Stopping ProtocolHandler ["http-nio-8090"]
+2023-02-08 15:00:46,282 INFO o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] Destroying ProtocolHandler ["http-nio-8090"]
+2023-02-08 15:00:46,315 INFO o.s.o.j.AbstractEntityManagerFactoryBean [RMI TCP Connection(2)-127.0.0.1] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-08 15:00:46,556 WARN o.s.b.f.s.DisposableBeanAdapter [RMI TCP Connection(2)-127.0.0.1] Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2023-02-08 15:00:46,557 INFO c.z.h.HikariDataSource [RMI TCP Connection(2)-127.0.0.1] HikariPool-1 - Shutdown initiated...
+2023-02-08 15:00:46,611 INFO c.z.h.HikariDataSource [RMI TCP Connection(2)-127.0.0.1] HikariPool-1 - Shutdown completed.

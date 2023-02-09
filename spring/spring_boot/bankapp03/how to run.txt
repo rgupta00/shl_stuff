@@ -1,0 +1,64 @@
+how to call it
+
+
+get all the accounts
+
+http://localhost:8090/accountapp/crud/accounts
+
+add new account
+
+http://localhost:8090/accountapp/crud/accounts
+
+use the method : post
+
+
+ {
+        "name": "jatin",
+        "balance": 6000.00,
+        "phone": "6560056656",
+        "address": "noida"
+    }
+    
+
+update an account
+http://localhost:8090/accountapp/crud/accounts/5
+ {
+        "phone": "6590056656",
+        "address": "NY"
+ }
+
+delete an account
+http://localhost:8090/accountapp/crud/accounts/5
+
+
+
+for transfer:
+--------------
+http://localhost:8090/accountapp/transactions/transfer
+
+{
+        "fromAccId": 1,
+        "toAccId": 20,
+        "amount":10
+  }
+
+
+for deposit:
+--------------
+
+http://localhost:8090/accountapp/transactions/deposit
+{
+        "accId": 1,
+        "amount":30
+}
+
+
+for withdarw:
+--------------
+
+http://localhost:8090/accountapp/transactions/withdraw
+{
+        "accId": 1,
+        "amount":30
+}
+

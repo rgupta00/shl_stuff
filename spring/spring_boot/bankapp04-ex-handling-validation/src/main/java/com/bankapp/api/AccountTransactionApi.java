@@ -1,5 +1,6 @@
 package com.bankapp.api;
 
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,12 +22,17 @@ public class AccountTransactionApi {
 
 	final private AccountService accountService;
 	
+	final private Environment environment;
+	
+	
 	//transfer
 	
 	@PostMapping(path = "transfer")
 	public ResponseEntity<String> transfer(@RequestBody  TransferDto transferDto){
 		accountService.transfer(transferDto.getFromAccId(), transferDto.getToAccId(), transferDto.getAmount());
-		return ResponseEntity.status(HttpStatus.OK).body("fund transfer happen successfully!");
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(environment.getProperty("UserInterface.TRANSFER_SUCCESS"));
 	}
 	
 	//deposit

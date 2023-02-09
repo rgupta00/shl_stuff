@@ -1,0 +1,135 @@
+2023-02-08 16:14:56,361 INFO o.s.b.StartupInfoLogger [restartedMain] Starting ProductappApplication using Java 11.0.1 on raj-Aspire-E5-575G with PID 16380 (/home/raj/Desktop/shl_stuff/spring/spring_boot/productappV3/target/classes started by raj in /home/raj/Desktop/shl_stuff/spring/spring_boot/productappV3)
+2023-02-08 16:14:56,368 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-02-08 16:14:56,431 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-08 16:14:56,431 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-08 16:14:57,122 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-08 16:14:57,176 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 38 ms. Found 1 JPA repository interfaces.
+2023-02-08 16:14:57,864 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8090 (http)
+2023-02-08 16:14:57,872 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8090"]
+2023-02-08 16:14:57,872 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-02-08 16:14:57,873 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-02-08 16:14:58,081 INFO o.a.j.l.DirectJDKLog [restartedMain] At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2023-02-08 16:14:58,088 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-02-08 16:14:58,088 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1656 ms
+2023-02-08 16:14:58,128 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-02-08 16:14:58,209 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-02-08 16:14:58,219 INFO o.s.b.a.h.H2ConsoleAutoConfiguration [restartedMain] H2 console available at '/h2'. Database available at 'jdbc:h2:mem:testdb'
+2023-02-08 16:14:59,020 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-08 16:14:59,520 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-08 16:14:59,791 DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter [restartedMain] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-02-08 16:14:59,860 DEBUG o.s.w.s.h.AbstractHandlerMethodMapping [restartedMain] 11 mappings in 'requestMappingHandlerMapping'
+2023-02-08 16:15:00,274 DEBUG o.s.w.s.h.SimpleUrlHandlerMapping [restartedMain] Patterns [/webjars/**, /**, /swagger-ui*/**] in 'resourceHandlerMapping'
+2023-02-08 16:15:00,288 DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver [restartedMain] ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-02-08 16:15:00,520 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-02-08 16:15:00,543 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8090"]
+2023-02-08 16:15:00,560 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8090 (http) with context path '/productapp'
+2023-02-08 16:15:00,573 INFO o.s.b.StartupInfoLogger [restartedMain] Started ProductappApplication in 4.631 seconds (JVM running for 5.465)
+2023-02-08 16:15:00,581 INFO c.p.u.LoggingAspect [restartedMain] logged is done
+2023-02-08 16:15:00,581 INFO c.p.u.LoggingAspect [restartedMain] --------------------
+2023-02-08 16:15:00,630 INFO c.p.u.LoggingAspect [restartedMain] time taken: 48 ms
+2023-02-08 16:15:00,638 INFO c.p.u.LoggingAspect [restartedMain] logged is done
+2023-02-08 16:15:00,638 INFO c.p.u.LoggingAspect [restartedMain] --------------------
+2023-02-08 16:15:00,639 INFO c.p.u.LoggingAspect [restartedMain] time taken: 1 ms
+2023-02-08 16:15:00,640 INFO c.p.u.LoggingAspect [restartedMain] logged is done
+2023-02-08 16:15:00,641 INFO c.p.u.LoggingAspect [restartedMain] --------------------
+2023-02-08 16:15:00,642 INFO c.p.u.LoggingAspect [restartedMain] time taken: 2 ms
+2023-02-08 16:15:00,643 INFO c.p.u.LoggingAspect [restartedMain] logged is done
+2023-02-08 16:15:00,643 INFO c.p.u.LoggingAspect [restartedMain] --------------------
+2023-02-08 16:15:00,644 INFO c.p.u.LoggingAspect [restartedMain] time taken: 1 ms
+2023-02-08 16:15:05,570 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:05,573 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:05,574 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:05,575 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 2 ms
+2023-02-08 16:15:05,576 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:07,570 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:07,571 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:07,571 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:07,572 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 1 ms
+2023-02-08 16:15:07,573 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:09,570 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:09,571 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:09,571 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:09,572 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 1 ms
+2023-02-08 16:15:09,573 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:11,570 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:11,572 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:11,572 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:11,573 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 1 ms
+2023-02-08 16:15:11,575 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:13,569 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:13,570 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:13,570 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:13,571 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 0 ms
+2023-02-08 16:15:13,571 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:15,570 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:15,571 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:15,572 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:15,573 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 2 ms
+2023-02-08 16:15:15,574 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:17,569 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:17,570 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:17,570 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:17,570 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 0 ms
+2023-02-08 16:15:17,571 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:19,570 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:19,571 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:19,572 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:19,573 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 2 ms
+2023-02-08 16:15:19,574 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:21,570 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:21,571 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:21,572 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:21,572 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 1 ms
+2023-02-08 16:15:21,574 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:23,570 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:23,571 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:23,571 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:23,571 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 0 ms
+2023-02-08 16:15:23,572 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:25,570 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] > fixedRateJob
+2023-02-08 16:15:25,571 INFO c.p.u.LoggingAspect [scheduling-1] logged is done
+2023-02-08 16:15:25,571 INFO c.p.u.LoggingAspect [scheduling-1] --------------------
+2023-02-08 16:15:25,572 INFO c.p.u.LoggingAspect [scheduling-1] time taken: 1 ms
+2023-02-08 16:15:25,573 INFO c.p.u.CacheCleanScheduledProcess [scheduling-1] < fixedRateJob
+2023-02-08 16:15:27,247 INFO o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin [RMI TCP Connection(2)-127.0.0.1] Application shutdown requested.
+2023-02-08 16:15:27,254 INFO o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] Pausing ProtocolHandler ["http-nio-8090"]
+2023-02-08 16:15:27,255 INFO o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] Stopping service [Tomcat]
+2023-02-08 16:15:27,262 WARN o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] The web application [productapp] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@11.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@11.0.1/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:234)
+ java.base@11.0.1/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2123)
+ java.base@11.0.1/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base@11.0.1/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base@11.0.1/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+ java.base@11.0.1/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+ java.base@11.0.1/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+ java.base@11.0.1/java.lang.Thread.run(Thread.java:834)
+2023-02-08 16:15:27,264 INFO o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] Stopping ProtocolHandler ["http-nio-8090"]
+2023-02-08 16:15:27,266 INFO o.a.j.l.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] Destroying ProtocolHandler ["http-nio-8090"]
+2023-02-08 16:15:27,275 INFO o.s.o.j.AbstractEntityManagerFactoryBean [RMI TCP Connection(2)-127.0.0.1] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-08 16:15:27,287 ERROR c.z.h.p.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Error thrown while acquiring connection from data source
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database is open in exclusive mode; can not open additional connections [90135-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.message.DbException.get(DbException.java:205) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.message.DbException.get(DbException.java:181) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.message.DbException.get(DbException.java:170) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.engine.Session.checkSuspended(Session.java:1369) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.engine.Session.transitionToState(Session.java:1361) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.engine.Session.waitIfExclusiveModeEnabled(Session.java:1633) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.command.Command.executeQuery(Command.java:186) ~[h2-1.4.200.jar:1.4.200]
+	at org.h2.jdbc.JdbcConnection.isReadOnly(JdbcConnection.java:631) ~[h2-1.4.200.jar:1.4.200]
+	at com.zaxxer.hikari.pool.PoolBase.setupConnection(PoolBase.java:408) ~[HikariCP-4.0.3.jar:?]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-4.0.3.jar:?]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:?]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:?]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) ~[HikariCP-4.0.3.jar:?]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726) ~[HikariCP-4.0.3.jar:?]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712) ~[HikariCP-4.0.3.jar:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[?:?]
+	at java.lang.Thread.run(Thread.java:834) ~[?:?]
+2023-02-08 16:15:27,488 WARN o.s.b.f.s.DisposableBeanAdapter [RMI TCP Connection(2)-127.0.0.1] Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-200]
+2023-02-08 16:15:27,489 INFO c.z.h.HikariDataSource [RMI TCP Connection(2)-127.0.0.1] HikariPool-1 - Shutdown initiated...
+2023-02-08 16:15:27,544 INFO c.z.h.HikariDataSource [RMI TCP Connection(2)-127.0.0.1] HikariPool-1 - Shutdown completed.
